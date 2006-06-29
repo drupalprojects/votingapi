@@ -1,0 +1,69 @@
+# LANGUAGE translation of Drupal (votingapi.module)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from file: votingapi.module,v 1.37 2006/06/09 00:15:01 eaton
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2006-06-29 19:13+0200\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: votingapi.module:29
+msgid "Provides a shared voting API for other modules."
+msgstr ""
+
+#: votingapi.module:31
+msgid "Provides a shared API for other modules to store and display community votes and ratings."
+msgstr ""
+
+#: votingapi.module:46
+msgid "Vote tallying"
+msgstr ""
+
+#: votingapi.module:47
+msgid "On high-traffic sites, administrators can use this setting to postpone the calculation of vote results."
+msgstr ""
+
+#: votingapi.module:50
+msgid "Tally results whenever a vote is cast"
+msgstr ""
+
+#: votingapi.module:51
+msgid "Tally results at cron-time"
+msgstr ""
+
+#: votingapi.module:52
+msgid "Never tally votes: I am using a custom module to control vote results"
+msgstr ""
+
+#: votingapi.module:58
+msgid "Actions"
+msgstr ""
+
+#: votingapi.module:59
+msgid "Voting actions can perform tasks depending on the results of a vote. Requires actions.module."
+msgstr ""
+
+#: votingapi.module:62
+msgid "Allow modules to register their own voting actions"
+msgstr ""
+
+#: votingapi.module:63
+msgid "Only perform voting actions I configure (votingapi_actions.module must be enabled)"
+msgstr ""
+
+#: votingapi.module:64
+msgid "Disable voting actions "
+msgstr ""
+
+#: votingapi.module:0
+msgid "votingapi"
+msgstr ""
+

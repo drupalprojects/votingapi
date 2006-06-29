@@ -1,0 +1,53 @@
+# LANGUAGE translation of Drupal (votingapi_views.inc)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# No version information was available in the source files.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2006-06-29 19:13+0200\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: votingapi_views.inc:22
+msgid "VotingAPI: Voting results"
+msgstr ""
+
+#: votingapi_views.inc:30
+msgid "VotingAPI: Vote tag"
+msgstr ""
+
+#: votingapi_views.inc:69
+msgid "VotingAPI: Has been voted on"
+msgstr ""
+
+#: votingapi_views.inc:74
+msgid "This will filter out nodes that have or have not been voted on."
+msgstr ""
+
+#: votingapi_views.inc:96
+msgid "VotingAPI: Individual vote value"
+msgstr ""
+
+#: votingapi_views.inc:104
+msgid "VotingAPI: Individual vote tag"
+msgstr ""
+
+#: votingapi_views.inc:110
+msgid "VotingAPI: Individual vote timestamp"
+msgstr ""
+
+#: votingapi_views.inc:124
+msgid "VotingAPI: Individual vote user"
+msgstr ""
+
+#: votingapi_views.inc:216;237
+msgid "no votes"
+msgstr ""
+

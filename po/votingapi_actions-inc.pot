@@ -1,0 +1,61 @@
+# LANGUAGE translation of Drupal (votingapi_actions.inc)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# No version information was available in the source files.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2006-06-29 19:13+0200\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: votingapi_actions.inc:664
+msgid "Touched creation date of node id %id"
+msgstr ""
+
+#: votingapi_actions.inc:669
+msgid "Touch node creation date"
+msgstr ""
+
+#: votingapi_actions.inc:670;706
+msgid "Node"
+msgstr ""
+
+#: votingapi_actions.inc:700
+msgid "Touched change date of node id %id"
+msgstr ""
+
+#: votingapi_actions.inc:705
+msgid "Touch node change date"
+msgstr ""
+
+#: votingapi_actions.inc:733
+msgid "Set comment id %id to Published"
+msgstr ""
+
+#: votingapi_actions.inc:738
+msgid "Publish comment"
+msgstr ""
+
+#: votingapi_actions.inc:739;769
+msgid "Comment"
+msgstr ""
+
+#: votingapi_actions.inc:763
+msgid "Set comment id %id to Unpublished"
+msgstr ""
+
+#: votingapi_actions.inc:768
+msgid "Unpublish comment"
+msgstr ""
+
+#: votingapi_actions.inc:664;700;733;763
+msgid "action"
+msgstr ""
+
