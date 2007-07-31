@@ -1,0 +1,143 @@
+<?php
+
+function votingapi_generate_create_votes($nodes, $vote_type = 'percent', $user_chance = 50, $tags = array()) {
+  $users = votingapi_generate_get_users();
+  $original_state = variable_get('votingapi_calculation_schedule', 'immediate');
+  variable_set('votingapi_calculation_schedule', 'cron');
+
+  foreach($nodes as $nid) {
+    foreach ($users as $uid) {
+      if (mt_rand(0, 100) <= $user_chance) {
+        if (empty($tags)) {
+          $vote = '';
+          $vote->value_type = $vote_type;
+          $vote->tag = 'vote';
+          $vote->value = mt_rand(0, 100);
+          votingapi_set_vote('node', $nid, $vote, $uid);
+        }
+        else {
+          $votes = array();
+          $total = 0;
+          foreach ($tags as $tag) {
+            $vote = '';
+            $vote->value_type = $vote_type;
+            $vote->tag = $tag;
+            $vote->value = mt_rand(0, 100);
+            $total += $vote->value;
+            $votes[] = $vote;
+          }
+          $vote = '';
+          $vote->value_type = $vote_type;
+          $vote->tag = 'vote';
+          $vote->value = intval($total / count($tags));
+          $votes[] = $vote;
+
+          votingapi_set_vote('node', $nid, $vote, $uid);
+        }
+      }
+    }
+  }
+
+  variable_set('votingapi_calculation_schedule', $original_state);
+  foreach ($nodes as $nid) {
+    votingapi_recalculate_results('node', $nid, TRUE);
+  }
+
+  return t('Votes generated for %count nodes.', array('%count' => count($nodes)));
+}
+
+// like devel_generate.inc, but we need not depend on that module just for this simple function
+function votingapi_generate_get_users() {
+  $users = array();
+  $result = db_query("SELECT uid FROM {users}");
+  while($user = db_fetch_object($result)){
+    $users[] = $user->uid;
+  }
+  return $users;
+}
+
+
+function votingapi_generate_menu($may_cache) {
+  if ($may_cache) {  
+    $items[] = array(
+      'path' => 'admin/content/generate_votes',
+      'title' => t('Generate votes'),
+      'description' => t('Generate a given number of VotingAPI votes.'),
+      'callback' => 'drupal_get_form',
+      'callback arguments' => array('votingapi_generate_votes_form'),
+      'access' => user_access('administer nodes'),
+      'type' => MENU_NORMAL_ITEM
+    );
+  }
+  return $items;
+}
+
+function votingapi_generate_votes_form() {
+    $form['node_coverage'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Node coverage'),
+    '#description' => t('The chance that a given node will be voted on. To ensure that some nodes will always be left unvoted, set this lower than 100.'),
+    '#default_value' => 100,
+    '#size' => 10,
+  );
+  $form['user_chance'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Per-user vote chance'),
+    '#description' => t('The chance that a specific user will vote on a node. To force every user to vote on every node, set this to 100.'),
+    '#default_value' => 50,
+    '#size' => 10,
+  );
+  // Force this to percentage voting for now.
+  $form['vote_type'] = array(
+    '#type' => 'hidden',
+    '#value' => 'percent',
+    '#title' => t('Vote type'),
+    '#options' => array('percent' => t('Percentage scale'), 'points' => t('Digg-style points')),
+    '#default_value' => 'percent',  
+  );
+  $form['vote_tags'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Criteria'),
+    '#description' => t('An optional comma-delimited array of multiple vote criteria.'),
+  );
+  $form['vote_clear'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Delete existing votes'),
+    '#return_value' => 1,
+    '#default_value' => 1,
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Do it!'),
+  );
+  return $form;
+}
+
+function votingapi_generate_votes_form_submit($form_id, $form_values) {  
+  if ($form_values['vote_clear']) {
+    db_query("DELETE FROM {votingapi_vote}");
+    db_query("DELETE FROM {votingapi_cache}");
+    db_query("UPDATE {sequences} SET id = '0' WHERE name = '{votingapi_vote}'");
+    db_query("UPDATE {sequences} SET id = '0' WHERE name = '{votingapi_cache}'");
+  }
+
+  if (!empty($form_values['vote_tags'])) {
+    $tags = split(',', $form_values['vote_tags']);
+  }
+  else {
+    $tags = array();
+  }
+  
+  $coverage = is_numeric($form_values['node_coverage']) ? max(min($form_values['node_coverage'], 100), 0) : 100;
+  $user_chance = is_numeric($form_values['user_chance']) ? max(min($form_values['user_chance'], 100), 0) : 50;
+
+  $nodes = array();
+  $result = db_query("SELECT nid FROM {node} WHERE RAND() <= %f", $coverage / 100);
+  while($node = db_fetch_object($result)){
+    $nodes[] = $node->nid ;
+  }
+
+  $output = votingapi_generate_create_votes($nodes, $form_values['vote_type'], $user_chance, $tags);
+  drupal_set_message($output);
+}

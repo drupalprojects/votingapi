@@ -1,0 +1,5 @@
+; $Id
+name = Generate Votes
+description = Generate votes for development purposes
+package = Voting API
+dependencies = votingapi
