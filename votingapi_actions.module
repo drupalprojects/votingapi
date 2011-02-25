@@ -1,5 +1,4 @@
 <?php
-// $Id$
 
 /**
  * Lets users directly control the votingapi's integration with the actions module.

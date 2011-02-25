@@ -1,5 +1,4 @@
 <?php
-// $Id$
 
 /*********************************************
  *  VOTINGAPI ACTION CONDITION HANDLERS

@@ -1,5 +1,4 @@
 <?php
-// $Id$
 
 function votingapi_views_tables() {
   $vote_tags = _votingapi_views_values($field = 'tag', $table = 'vote');

@@ -1,5 +1,4 @@
 <?php
-// $Id$
 
 // Contains UI management functions for the votingapi_actions module.
 

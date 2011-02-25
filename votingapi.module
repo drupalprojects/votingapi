@@ -1,5 +1,4 @@
 <?php
-/* $Id$ */
 
 /**
  * A generalized voting API for Drupal. See README.txt for details.
