@@ -1,0 +1,3 @@
+name = Rate Limit
+description = Provide an API that allows to limit how often users can take certain actions.
+core = 7.x

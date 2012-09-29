@@ -1,0 +1,48 @@
+<?php
+
+/**
+ * Implements hook_schema().
+ */
+function rate_limit_schema() {
+  $unsigned_nn = array(
+    'type' => 'int',
+    'unsigned' => TRUE,
+    'not null' => TRUE,
+  );
+  $tables = array();
+  $tables['rate_limit_log'] = array(
+    'description' => 'Log of taken actions',
+    'fields' => array(
+      'id' => array(
+        'description' => 'Primary identifier',
+        'type' => 'serial',
+      ) + $unsigned_nn,
+      'action_id' => array(
+        'description' => 'An identifier for this kind of action.',
+        'type' => 'varchar',
+        'length' => '127',
+        'not null' => TRUE,
+      ),
+      'timestamp' => array(
+        'description' => 'The time at which the action took place.',
+        'defaul' => 0,
+      ) + $unsigned_nn,
+      'uid' => array(
+        'description' => 'The logged in user that took this action.',
+      ) + $unsigned_nn,
+      'ip_address' => array(
+        'description' => 'IP-address of the user taking the action.',
+        'type' => 'varchar',
+        'length' => '32',
+      ),
+    ),
+  );
+  return $tables;
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function rate_limit_uninstall() {
+  db_delete('variables')->condition('name', 'rate_limit_config_%', 'LIKE')->execute();
+}
