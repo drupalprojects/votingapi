@@ -8,8 +8,8 @@
  *
  * Maintains and provides an interface for a shared bin of vote and rating
  * data. Modules can cast votes with arbitrary properties and VotingAPI will
- * total them automatically. Support for basic anonymous voting by IP address,
- * multi-criteria voting, arbitrary aggregation functions, etc.
+ * total them automatically. Support for basic anonymous voting by
+ * IP address hash, multi-criteria voting, arbitrary aggregation functions, etc.
  */
 
 use Drupal\views\Plugin\views\query\QueryPluginBase;

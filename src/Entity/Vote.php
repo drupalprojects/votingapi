@@ -213,7 +213,7 @@ class Vote extends ContentEntityBase implements VoteInterface {
 
     $fields['vote_source'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Vote Source'))
-      ->setDescription(t('The IP from the user who submitted the vote.'))
+      ->setDescription(t('The IP address hash from the user who submitted the vote.'))
       ->setDefaultValueCallback('Drupal\votingapi\Entity\Vote::getCurrentIp')
       ->setSettings([
         'max_length' => 255,
@@ -243,7 +243,7 @@ class Vote extends ContentEntityBase implements VoteInterface {
    *   An array of default values.
    */
   public static function getCurrentIp() {
-    return \Drupal::request()->getClientIp();
+    return hash('sha256', serialize(\Drupal::request()->getClientIp()));
   }
 
   /**

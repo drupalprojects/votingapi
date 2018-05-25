@@ -87,7 +87,7 @@ interface VoteInterface extends ContentEntityInterface, EntityOwnerInterface {
   public function setOwnerId($uid);
 
   /**
-   * Returns the source of the vote.  By default, this is the user's IP address.
+   * Returns the source of the vote.  It is the user's IP address hash.
    *
    * @return string
    *   The vote source.
@@ -95,7 +95,7 @@ interface VoteInterface extends ContentEntityInterface, EntityOwnerInterface {
   public function getSource();
 
   /**
-   * Sets the source of the vote. By default, this is the user's IP address.
+   * Sets the source of the vote. It is the user's IP address hash.
    *
    * @param string $source
    *   The source of the vote.

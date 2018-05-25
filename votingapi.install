@@ -52,3 +52,25 @@ function votingapi_update_8301(&$sandbox) {
     }
   }
 }
+
+/**
+ * Implements hook_update_N().
+ *
+ * Update the structure of data storage.
+ */
+function votingapi_update_8302(&$sandbox) {
+  $query = \Drupal::database()->select('votingapi_vote', 'v');
+  $query->fields('v', ['id', 'vote_source']);
+  $results = $query->execute()->fetchAll();
+  if (!empty($results)) {
+    foreach ($results as $result) {
+      if (!empty($result) && !empty($result->vote_source)) {
+        $data = hash('sha256', serialize($result->vote_source));
+        $query = \Drupal::database()->update('votingapi_vote');
+        $query->fields(['vote_source' => $data]);
+        $query->condition('id', $result->id);
+        $query->execute();
+      }
+    }
+  }
+}
